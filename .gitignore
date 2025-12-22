@@ -1,0 +1,16 @@
+# Dépendances (Le plus important !)
+node_modules/
+backend/node_modules/
+frontend/node_modules/
+
+# Environnement et secrets
+.env
+.env.local
+
+# Dossiers de build
+dist/
+build/
+
+# Logs et divers
+npm-debug.log*
+.DS_Store
