@@ -1,0 +1,12 @@
+[
+  { "_id": { "$oid": "666300000000000000000001" }, "firstName": "Aya", "lastName": "Lh", "email": "aya@test.com", "password": "1234" },
+  { "_id": { "$oid": "666300000000000000000002" }, "firstName": "Sara", "lastName": "Benali", "email": "sara@test.com", "password": "1234" },
+  { "_id": { "$oid": "666300000000000000000003" }, "firstName": "Omar", "lastName": "Khalil", "email": "omar@test.com", "password": "1234" },
+  { "_id": { "$oid": "666300000000000000000004" }, "firstName": "Yassine", "lastName": "El Amrani", "email": "yassine@test.com", "password": "1234" },
+  { "_id": { "$oid": "666300000000000000000005" }, "firstName": "Hajar", "lastName": "Naji", "email": "hajar@test.com", "password": "1234" },
+  { "_id": { "$oid": "666300000000000000000006" }, "firstName": "Mehdi", "lastName": "Bouzid", "email": "mehdi@test.com", "password": "1234" },
+  { "_id": { "$oid": "666300000000000000000007" }, "firstName": "Imane", "lastName": "Zahraoui", "email": "imane@test.com", "password": "1234" },
+  { "_id": { "$oid": "666300000000000000000008" }, "firstName": "Hamza", "lastName": "Ait Ali", "email": "hamza@test.com", "password": "1234" },
+  { "_id": { "$oid": "666300000000000000000009" }, "firstName": "Noura", "lastName": "Idrissi", "email": "noura@test.com", "password": "1234" },
+  { "_id": { "$oid": "666300000000000000000010" }, "firstName": "Amine", "lastName": "Raji", "email": "amine@test.com", "password": "1234" }
+]

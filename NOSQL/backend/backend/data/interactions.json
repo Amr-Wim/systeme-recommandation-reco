@@ -1,0 +1,14 @@
+[
+  { "user_id": { "$oid": "666300000000000000000001" }, "product_id": { "$oid": "665300000000000000000001" }, "event": "purchase", "timestamp": { "$date": "2025-01-01" } },
+  { "user_id": { "$oid": "666300000000000000000001" }, "product_id": { "$oid": "665300000000000000000005" }, "event": "purchase", "timestamp": { "$date": "2025-01-03" } },
+  { "user_id": { "$oid": "666300000000000000000001" }, "product_id": { "$oid": "665300000000000000000006" }, "event": "purchase", "timestamp": { "$date": "2025-01-05" } },
+
+  { "user_id": { "$oid": "666300000000000000000002" }, "product_id": { "$oid": "665300000000000000000002" }, "event": "purchase", "timestamp": { "$date": "2025-01-02" } },
+  { "user_id": { "$oid": "666300000000000000000002" }, "product_id": { "$oid": "665300000000000000000011" }, "event": "purchase", "timestamp": { "$date": "2025-01-06" } },
+
+  { "user_id": { "$oid": "666300000000000000000003" }, "product_id": { "$oid": "665300000000000000000003" }, "event": "purchase", "timestamp": { "$date": "2025-01-01" } },
+  { "user_id": { "$oid": "666300000000000000000003" }, "product_id": { "$oid": "665300000000000000000010" }, "event": "purchase", "timestamp": { "$date": "2025-01-04" } },
+
+  { "user_id": { "$oid": "666300000000000000000004" }, "product_id": { "$oid": "665300000000000000000007" }, "event": "purchase", "timestamp": { "$date": "2025-01-02" } },
+  { "user_id": { "$oid": "666300000000000000000004" }, "product_id": { "$oid": "665300000000000000000016" }, "event": "purchase", "timestamp": { "$date": "2025-01-07" } }
+]
