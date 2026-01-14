@@ -109,4 +109,4 @@ The project includes 3 test profiles to demonstrate the algorithm:
 This project was developed as a demonstration of **NoSQL Database management** and **Recommendation Systems**. Feel free to use and improve it!
 
 ---
-*Developed with ❤️ by [Your Name]*
+*Developed with ❤️ by wiame*
