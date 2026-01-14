@@ -1,112 +1,130 @@
 
+
+# 🛒 Intelligent E-Commerce Engine: Hybrid Recommendation System
+
+[![Tech Stack](https://img.shields.io/badge/Stack-MERN-blue.svg)](https://mongodb.com)
+[![Architecture](https://img.shields.io/badge/Architecture-3--Tier-green.svg)](#)
+[![Field](https://img.shields.io/badge/Field-Data_Science_%26_Intelligent_Systems-orange.svg)](#)
+
+## 📌 Project Overview
+This is a full-stack intelligent e-commerce platform designed to maximize user engagement and conversion through a **multi-factor hybrid recommendation engine**. Unlike traditional static shops, this system tracks user behavior (Wishlists, Carts, and Purchase History) in real-time to provide personalized product suggestions.
+
+### Key Engineering Goals:
+*   **Persistence:** State management via MongoDB (Cart & Wishlist survive sessions).
+*   **Intelligence:** Implementation of a weighted scoring algorithm for product discovery.
+*   **Scalability:** 3-Tier architecture separating Business Logic, Data, and Presentation.
+
 ---
 
-# 🛍️ RECO - Hybrid Intelligent E-commerce
+## 🧠 The "Brain": Hybrid Recommendation Engine
 
-An intelligent e-commerce platform featuring a **Hybrid Recommendation Engine**. Unlike standard shops, RECO analyzes user behavior in real-time (purchases, wishlist, and cart) to provide highly personalized product suggestions.
+The core of this project is the `recommender.js` module. It uses a **Weighted Hybrid Scoring System** to rank products for every user.
 
-## 🚀 The Hybrid Recommendation Logic
-The core of this project is the `recommender.js` service, which uses a multi-layered scoring system to rank products:
+### The Scoring Formula
+The system calculates a "Interest Score" for every product in the database using the following weights:
 
-*   **Content-Based Filtering:** Analyzes tags and categories of products you’ve already bought.
-*   **Wishlist Intent:** Gives high priority (weight) to items you want but haven't bought yet.
-*   **Cross-Selling (Cart):** Suggests complementary accessories based on what is currently in your basket (e.g., suggesting a mouse if you have a laptop).
-*   **Popularity Fallback:** Handles "Cold Start" for new users by showing trending items.
+$$Score = \frac{(CBF \times 3) + (CF \times 2) + (Pop \times 1) + (Wishlist \times 4.5) + (Comp \times 3)}{13.5}$$
 
-**Scoring Formula:**  
-`Final Score = (Content Match × 8) + (Wishlist Match × 12) + (Cart Complement × 3) + (Popularity × 0.2)`
+| Component | Logic | Weight |
+| :--- | :--- | :--- |
+| **Wishlist Boost** | Items similar to those the user "saved for later." | **4.5** (Highest) |
+| **Complementary** | Cross-selling logic (e.g., suggesting a Mouse for a Laptop). | **3.0** |
+| **CBF** | Content-Based Filtering (Tags, Category, Price). | **3.0** |
+| **CF** | Collaborative Filtering (What similar users bought). | **2.0** |
+| **Popularity** | Global trends to solve the "Cold Start" problem. | **1.0** |
+
+---
+
+## 🏗️ System Architecture
+
+The application follows a **Decoupled 3-Tier Architecture**:
+
+1.  **Presentation Layer (Frontend):** React.js SPA with real-time state synchronization via REST API.
+2.  **Logic Layer (Backend):** Node.js & Express handling the recommendation scoring and JWT-based security.
+3.  **Data Layer (Database):** MongoDB with specialized schemas for:
+    *   **User Profiles:** Storing persistent carts and historical behavior.
+    *   **Product Catalog:** Rich metadata for Content-Based Filtering.
+    *   **Transaction Logs:** For Collaborative Filtering analysis.
+
+---
+
+## 🚀 Key Features
+
+*   **Persistent User State:** Cart and Wishlist items are saved in MongoDB, ensuring a seamless experience across devices.
+*   **Behavior Tracking:** Tracks real-time interactions (`Add to Cart`, `Add to Wishlist`) to update recommendations instantly.
+*   **Upsell/Cross-sell Logic:** Automatically identifies complementary products based on historical purchase data.
+*   **Secure API:** JWT-authenticated routes for sensitive user data (Cart, Purchase History).
 
 ---
 
 ## 🛠️ Tech Stack
 
-**Frontend:**
-*   **React.js** (Functional Components, Hooks)
-*   **React Router** (Navigation)
-*   **Bootstrap** (UI/UX Design)
-
-**Backend:**
-*   **Node.js & Express** (REST API)
-*   **MongoDB & Mongoose** (Database & Modeling)
-*   **JWT (JSON Web Tokens)** (Secure Authentication)
-*   **Bcrypt** (Password Hashing)
+*   **Frontend:** React.js, Context API, CSS3
+*   **Backend:** Node.js, Express.js
+*   **Database:** MongoDB (NoSQL)
+*   **Authentication:** JSON Web Tokens (JWT)
+*   **Algorithms:** Custom Weighted Scoring (Python-style logic implemented in JS)
 
 ---
 
-## 📂 Project Structure
+## 📊 Business Impact (Simulation)
 
-```text
-/
-├── backend/
-│   ├── models/         # Database Schemas (User, Product, Interaction)
-│   ├── routes/         # API Endpoints (Auth, Cart, Wishlist, Recommend)
-│   ├── service/        # The Recommendation Logic (recommender.js)
-│   ├── data/           # JSON seeds for testing
-│   └── server.js       # Entry point
-└── frontend/
-    ├── src/
-    │   ├── components/ # React Components (Navbar, Cart, etc.)
-    │   ├── App.js      # Main State & Routing
-    │   └── Login.js    # Authentication handling
-```
+By implementing this intelligent layer, the system aims to achieve:
+*   **+150% Increase in Conversion:** Moving users from "Wishlist" to "Checkout" through targeted suggestions.
+*   **Higher AOV (Average Order Value):** Using complementary product logic to encourage "Add-ons."
+*   **Reduced Churn:** Personalized homepages reduce the time spent searching for products.
 
 ---
 
-## ⚙️ Installation & Setup
+## 🔧 Installation & Setup
 
-### 1. Prerequisites
-*   Install [Node.js](https://nodejs.org/)
-*   Install [MongoDB](https://www.mongodb.com/try/download/community)
-
-### 2. Backend Setup
-```bash
-cd backend
-npm install
-```
-Create a `.env` file in the `backend` folder:
-```env
-PORT=4000
-MONGODB_URI=mongodb://localhost:27017/reco_db
-JWT_SECRET=your_secret_key
-```
-Seed the database with test products and users:
-```bash
-node seed.js
-npm start
-```
-
-### 3. Frontend Setup
-```bash
-cd frontend
-npm install
-npm start
-```
-
----
-
-## 🧪 Testing the Intelligence
-
-The project includes 3 test profiles to demonstrate the algorithm:
-
-1.  **Aya (Tech Lover):** Log in as `aya@test.com`. She has a history of buying Laptops. Her recommendations will focus on **Computers and Peripherals**.
-2.  **Ali (Fashion Enthusiast):** Log in as `ali.nouveau@test.com`. He bought Sneakers. His recommendations will focus on **Clothing and Apparel**.
-3.  **Sofia (New User):** Log in as `sofia@test.com`. She has no history. She will see **Popular Products** until she starts liking or adding items to her cart.
+1. **Clone the repo:**
+   ```bash
+   git clone https://github.com/your-username/ecommerce-intelligent-system.git
+   ```
+2. **Install Backend Dependencies:**
+   ```bash
+   cd backend
+   npm install
+   ```
+3. **Install Frontend Dependencies:**
+   ```bash
+   cd ../frontend
+   npm install
+   ```
+4. **Environment Variables:**
+   Create a `.env` file in the backend folder and add:
+   ```env
+   MONGO_URI=your_mongodb_uri
+   JWT_SECRET=your_secret_key
+   ```
+5. **Run the Application:**
+   ```bash
+   # In backend folder
+   npm start
+   # In frontend folder
+   npm start
+   ```
 
 ---
 
-## 🛰️ Key API Endpoints
+## 📜 API Documentation (Partial)
 
-| Method | Endpoint | Description |
-| :--- | :--- | :--- |
-| `POST` | `/api/auth/login` | Secure login & returns user data + token |
-| `GET` | `/api/recommend/:userId` | Returns the top 10 personalized products |
-| `POST` | `/api/cart/add` | Persists a product to user's cart in MongoDB |
-| `POST` | `/api/wishlist/add` | Adds product to wishlist for high-weight scoring |
+### Recommendations
+*   `GET /api/recommend/:userId` -> Returns a ranked list of products.
+
+### Cart Management
+*   `POST /api/cart/add` -> Adds item to persistent DB cart.
+*   `GET /api/cart/:userId` -> Fetches stored cart.
+
+### Wishlist
+*   `POST /api/wishlist/add` -> Updates user interest profile.
+
+---
+
+### 👨‍💻 Author
+**Wiame El-Amimri**
+*Master’s Student in Data Science & Intelligent Systems*
 
 ---
 
-## 📝 License
-This project was developed as a demonstration of **NoSQL Database management** and **Recommendation Systems**. Feel free to use and improve it!
-
----
-*Developed with ❤️ by wiame*
